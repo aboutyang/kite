@@ -54,7 +54,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> i
         return baseMapper.queryNotButtonList();
     }
 
-    @Cacheable(value = MENU_CACHE)
+    @Cacheable(value = MENU_CACHE, key = "#root.methodName")
     @Override
     public List<SysMenuEntity> queryAllMenu() {
         return baseMapper.selectList(null);

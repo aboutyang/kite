@@ -3,7 +3,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
     druid:
-      url: jdbc:mysql://localhost:3306/kite-admin?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      url: jdbc:mysql://140.143.141.188:3306/kite-admin?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
       username: kite-admin
       password: ENC(GK3VI1FIWohxsZks/ZEyD0FOeCcHE9Wh)
       initial-size: 10

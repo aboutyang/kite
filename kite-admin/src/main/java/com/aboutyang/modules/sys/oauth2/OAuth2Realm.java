@@ -1,23 +1,28 @@
 package com.aboutyang.modules.sys.oauth2;
 
 import com.aboutyang.common.utils.SpringContextUtils;
+import com.aboutyang.config.CacheConfig;
 import com.aboutyang.modules.sys.entity.SysUserEntity;
 import com.aboutyang.modules.sys.entity.SysUserTokenEntity;
 import com.aboutyang.modules.sys.service.ShiroService;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.util.Date;
 import java.util.Set;
 
 /**
  * 认证
- *
  */
 @Service
 public class OAuth2Realm extends AuthorizingRealm {
@@ -29,6 +34,10 @@ public class OAuth2Realm extends AuthorizingRealm {
     @Lazy
     private ShiroService shiroService;
 
+    @Autowired
+    @Lazy
+    private CacheManager cacheManager;
+
     @Override
     public boolean supports(AuthenticationToken token) {
         return token instanceof OAuth2Token;
@@ -39,7 +48,7 @@ public class OAuth2Realm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        SysUserEntity user = (SysUserEntity)principals.getPrimaryPrincipal();
+        SysUserEntity user = (SysUserEntity) principals.getPrimaryPrincipal();
         Long userId = user.getUserId();
         //用户权限列表
         Set<String> permsSet = shiroService.getUserPermissions(userId);
@@ -58,14 +67,14 @@ public class OAuth2Realm extends AuthorizingRealm {
         //根据accessToken，查询用户信息
         SysUserTokenEntity tokenEntity = shiroService.queryByToken(accessToken);
         //token失效
-        if(tokenEntity == null || tokenEntity.getExpireTime().getTime() < System.currentTimeMillis()){
+        if (tokenEntity == null || tokenEntity.getExpireTime().getTime() < System.currentTimeMillis()) {
             throw new IncorrectCredentialsException("token失效，请重新登录");
         }
 
         //查询用户信息
         SysUserEntity user = shiroService.queryUser(tokenEntity.getUserId());
         //账号锁定
-        if(user.getStatus() == 0){
+        if (user.getStatus() == 0) {
             throw new LockedAccountException("账号已被锁定,请联系管理员");
         }
 

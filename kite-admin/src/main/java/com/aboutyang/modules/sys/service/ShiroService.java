@@ -21,6 +21,10 @@ public interface ShiroService {
 
     SysUserTokenEntity queryByToken(String token);
 
+    void refreshToken(SysUserTokenEntity userToken);
+
+    void saveUpdateToken(SysUserTokenEntity userToken);
+
     /**
      * 根据用户ID，查询用户
      * @param userId

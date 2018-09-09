@@ -35,7 +35,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptDao, SysDeptEntity> i
         return deptList;
     }
 
-    @Cacheable(value = DEPT_CACHE)
+    @Cacheable(value = DEPT_CACHE, key = "#root.methodName")
     public List<SysDeptEntity> queryTree(Map<String, Object> params) {
         return buildDeptTree(queryList(params), 0L);
     }

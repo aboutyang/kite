@@ -10,6 +10,7 @@ import com.aboutyang.modules.sys.entity.SysUserTokenEntity;
 import com.aboutyang.modules.sys.service.ShiroService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -54,9 +55,21 @@ public class ShiroServiceImpl implements ShiroService {
         return permsSet;
     }
 
+    @Cacheable(value = TOKEN_CACHE, key = "#token")
     @Override
     public SysUserTokenEntity queryByToken(String token) {
         return sysUserTokenDao.queryByToken(token);
+    }
+
+    @CacheEvict(value = TOKEN_CACHE, key = "#userToken.token")
+    @Override
+    public void refreshToken(SysUserTokenEntity userToken) {
+        sysUserTokenDao.updateAllColumnById(userToken);
+    }
+
+    @Override
+    public void saveUpdateToken(SysUserTokenEntity userToken) {
+        sysUserTokenDao.insert(userToken);
     }
 
     @Cacheable(value = USER_CACHE, key = "#userId")
