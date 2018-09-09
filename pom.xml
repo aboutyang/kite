@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.jd.cis</groupId>
+    <groupId>com.aboutyang</groupId>
     <artifactId>kite</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
@@ -34,6 +34,7 @@
         <joda.time.version>2.9.9</joda.time.version>
         <jjwt.version>0.9.0</jjwt.version>
         <commons-io.version>2.6</commons-io.version>
+        <guava.version>26.0-jre</guava.version>
     </properties>
 
     <dependencies>
@@ -106,6 +107,12 @@
             <artifactId>commons-io</artifactId>
             <!--<version>${commons-lang3.version}</version>-->
             <version>${commons-io.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
 
 

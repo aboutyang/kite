@@ -4,6 +4,20 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
+    <!-- 获取主机名称和IP地址， 在 pattern 中添加 [%contextName %ip]  -->
+    <!-- 通过此种方式获取IP 对系统性能有一定损耗 -->
+    <!--<contextName>${HOSTNAME}</contextName>-->
+    <!--<conversionRule conversionWord="ip" converterClass="com.aboutyang.common.logging.IPLogConfig" />-->
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--<pattern>%clr(%d{yyyy-MM-dd HH:mm:ss,SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr([%t]) %replace(%caller{1}){'\t|Caller.{1}0|\r\n', ''} - %m%n</pattern>-->
+            <pattern>%clr(%d{mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p})  %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-60.60logger{59}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
+            <!--<pattern>%d{yyyy-MM-dd HH:mm:ss} %5p ${PID:- } [%t]: %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}</pattern>-->
+            <!--<pattern>${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-&#45;&#45;){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}</pattern>-->
+        </encoder>
+    </appender>
+
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${LOG_PATH}${LOG_FILE}</File>
         <encoder>
@@ -15,7 +29,13 @@
         </rollingPolicy>
     </appender>
 
-    <root level="INFO">
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.mybatis" level="INFO"/>
+    <logger name="com.baomidou" level="INFO"/>
+    <logger name="org.apache.shiro" level="INFO"/>
+    <logger name="com.aboutyang" level="DEBUG"/>
+
+    <root level="WARN">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>

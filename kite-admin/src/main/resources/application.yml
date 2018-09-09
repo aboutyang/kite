@@ -7,6 +7,8 @@ server:
   servlet:
     context-path: /
 spring:
+  application:
+    name: Kite Admin
   profiles:
     active: dev
   jackson:
@@ -34,11 +36,24 @@ kite:
     open: false  # 是否开启redis缓存  true开启   false关闭
   shiro:
     redis: false # true表示shiro session存到redis里，需要开启redis，才会生效【分布式场景】
+  http:
+    logging:
+      enable: true
+      include-payload: true
+      max-payload-length: 4000
+      include-response-body: true
+      max-response-payload-length: 4000
+      url-patterns:
+        - /**
+      support-content-types:
+        - json
+        - xml
+        - text
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.jd.cis.modules.*.entity
+  typeAliasesPackage: com.aboutyang.modules.*.entity
   global-config:
     #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
     id-type: 0
@@ -61,10 +76,12 @@ mybatis-plus:
     sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
   configuration:
     map-underscore-to-camel-case: true
-    cache-enabled: false
+    #开启MyBatis的二级缓存
+    cache-enabled: true
     call-setters-on-nulls: true
 logging:
   level: debug
-  level.com.jd.cis: debug
+  level.com.aboutyang: debug
+  level.org.springframework.web.filter.CommonsRequestLoggingFilter: debug
   path: logs/
   file: admin.log

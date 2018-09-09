@@ -1,0 +1,96 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "name": "kite.http.logging",
+      "type": "com.aboutyang.config.RequestResponseLoggingProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": "==============================",
+      "name": "kite.http.logging.beautify-dividing-line",
+      "description": "输出华丽的分割线; 默认为 ==============================",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": false,
+      "name": "kite.http.logging.enable",
+      "description": "是否开启请求响应报文的日志记录",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": true,
+      "name": "kite.http.logging.include-client-info",
+      "description": "是否记录客户信息; 默认为 true， 记录",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": true,
+      "name": "kite.http.logging.include-headers",
+      "description": "是否记录请求头; 默认为 true， 记录",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": false,
+      "name": "kite.http.logging.include-payload",
+      "description": "是否记录请求体; 默认为 false, 不记录",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": true,
+      "name": "kite.http.logging.include-query-string",
+      "description": "是否记录query string; 默认为 true， 记录",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": true,
+      "name": "kite.http.logging.include-response",
+      "description": "是否记录响应信息; 默认为 true， 记录",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": false,
+      "name": "kite.http.logging.include-response-body",
+      "description": "是否记录响应体; 默认为 false, 不记录",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": 2000,
+      "name": "kite.http.logging.max-payload-length",
+      "description": "记录请求内容(request body) 最大长度; 默认为 2000",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": 2000,
+      "name": "kite.http.logging.max-response-payload-length",
+      "description": "记录响应内容(response body) 最大长度; 默认为 2000",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": "**",
+      "name": "kite.http.logging.support-content-types",
+      "description": "支持的 Content-Type 列表",
+      "type": "java.util.List<java.lang.String>"
+    },
+    {
+      "sourceType": "com.aboutyang.config.RequestResponseLoggingProperties",
+      "defaultValue": "\/*",
+      "name": "kite.http.logging.url-patterns",
+      "description": "记录匹配的URL",
+      "type": "java.lang.String"
+    }
+  ]
+}
